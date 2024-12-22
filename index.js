@@ -7,7 +7,7 @@ const app = express()
 const PORT = "3000"
 
 app.use(cors())
-app.use("/cart",cartRouter)
+app.use("/api/cart",cartRouter)
 
 
 app.listen(PORT,()=>{
