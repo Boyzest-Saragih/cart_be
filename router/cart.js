@@ -36,7 +36,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.put("/:id", (req,res)=>{
+router.put("/quantity/:id", (req,res)=>{
   const quantity = req.body.quantity
   const sql = `UPDATE cart_items SET quantity = ${quantity} WHERE cart_items.id = ${req.params.id}`
 
@@ -45,6 +45,19 @@ router.put("/:id", (req,res)=>{
       return res.json({status:500, error:true, result})
     }else{
       return res.json({status:200, error:false, result})
+    }
+  })
+})
+
+router.put("/checked/:id",(req,res)=>{
+  const is_checked = req.body.is_checked
+  const sql = `UPDATE cart_items SET is_checked = ${is_checked} WHERE cart_items.id = ${req.params.id};`
+
+  conn.query(sql, (err, result)=>{
+    if (err){
+      return res.json(err)
+    }else{
+      return res.json({status:200, result})
     }
   })
 })
