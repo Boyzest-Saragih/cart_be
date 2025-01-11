@@ -62,4 +62,39 @@ router.put("/checked/:id",(req,res)=>{
   })
 })
 
+router.delete("/item/:id", (req, res) => {
+  const sql = `DELETE FROM cart_items WHERE id = ${req.params.id}`;
+  conn.query(sql, (err, result) => {
+      if (err) {
+          res.json(err)
+      } else {
+          res.json({
+              status: 200,
+              error: false,
+              data: result
+          })
+      }
+  })
+})
+
+router.delete("/store/:storeName", (req, res) => {
+  const sql = `DELETE ci
+                FROM cart_tokopaedi.cart_items ci
+                JOIN cart_tokopaedi.products p ON ci.product_id = p.id
+                JOIN cart_tokopaedi.stores s ON p.store_id = s.id
+                WHERE s.name = '${req.params.storeName}'`;
+  conn.query(sql, (err, result) => {
+      if (err) {
+          res.json(err)
+      } else {
+          res.json({
+              status: 200,
+              error: false,
+              data: result
+          })
+      }
+  })
+})
+
+
 module.exports = router;
