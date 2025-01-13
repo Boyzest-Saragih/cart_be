@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
   JOIN stores s ON p.store_id = s.id;`;
   conn.query(sql, (err, result) => {
     if (err) {
-      return res.json({ status: 500, error: true, result });
+      return res.json({ status: 500, error: true, result});
     } else {
       return res.json({ status: 200, error: false, result });
     }
